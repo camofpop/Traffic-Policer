@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
-using British_Policing_Script;
-
-namespace Traffic_Policer.API
+﻿namespace Traffic_Policer.API
 {
     internal static class BritishPolicingScriptFunctions
     {

@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LSPDFR_;
-using Rage;
-using LSPD_First_Response.Engine.Scripting.Entities;
 
 namespace Traffic_Policer.API
 {

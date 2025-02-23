@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
 using System.Reflection;
 using Traffic_Policer.Impairment_Tests;
 
 namespace Traffic_Policer.API
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class Functions
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
         /// <summary>
         /// Check whether the vehicle is insured as per the insurance system.
@@ -222,11 +219,20 @@ namespace Traffic_Policer.API
         {
             return Breathalyzer.IsPedOverTheLimit(ped);
         }
+internal static object GetActivePursuit()
+        {
+            throw new NotImplementedException();
+        }
 
-        
+        internal static bool IsPlayerPerformingPullover()
+        {
+            throw new NotImplementedException();
+        }
 
-
-        
-
+        internal static object GetPursuitPeds(object v)
+        {
+            throw new NotImplementedException();
+        }
+    }
     }
 }

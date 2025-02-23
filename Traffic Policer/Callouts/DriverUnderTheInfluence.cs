@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
-using LSPD_First_Response.Mod.API;
-using LSPD_First_Response.Mod.Callouts;
-using Rage.Native;
-using Traffic_Policer.Extensions;
-using System.IO;
-using Albo1125.Common.CommonLibrary;
 using Traffic_Policer.Impairment_Tests;
 
 namespace Traffic_Policer.Callouts

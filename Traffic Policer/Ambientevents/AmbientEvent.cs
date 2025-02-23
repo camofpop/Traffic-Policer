@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
-using LSPD_First_Response.Mod.API;
+using Traffic_Policer.API;
+using static Traffic_Policer.Ambientevents.Ped;
 
 namespace Traffic_Policer.Ambientevents
 {
-    abstract internal class AmbientEvent
+    internal abstract class AmbientEvent
     {
         public Ped driver;
         protected bool eventRunning = true;
@@ -20,6 +18,12 @@ namespace Traffic_Policer.Ambientevents
         public GameFiber DrivingStyleFiber;
         public GameFiber AmbientEventMainFiber;
         public bool ReadyForGameFiberCleanup = false;
+
+        protected AmbientEvent(bool readyForGameFiberCleanup)
+        {
+            ReadyForGameFiberCleanup = readyForGameFiberCleanup;
+        }
+
         public AmbientEvent() { }
 
         public AmbientEvent(bool ShowMessage, string Message)
@@ -40,46 +44,136 @@ namespace Traffic_Policer.Ambientevents
             if (CreateBlip)
             {
                 driverBlip = driver.AttachBlip();
-                driverBlip.Color = System.Drawing.Color.Beige;
+                driverBlip.Color = Color.Beige;
                 driverBlip.Scale = 0.7f;
             }
             if (ShowMessage)
             {
                 Game.DisplayNotification(Message);
-            }           
+            }
         }
 
-
         protected abstract void MainLogic();
+
         protected virtual void End()
         {
-            //Add gamefibers to garbage and clean
             eventRunning = false;
             if (driverBlip.Exists()) { driverBlip.Delete(); }
-            if (!Functions.IsPlayerPerformingPullover() && !performingPullover)
+            if (!performingPullover)
             {
-                if (driver.Exists() && (Functions.GetActivePursuit() == null || !Functions.GetPursuitPeds(Functions.GetActivePursuit()).Contains(driver)))
+                if (driver.Exists())
                 {
                     driver.Dismiss();
                 }
 
-                if (car.Exists() && (!driver.Exists() || Functions.GetActivePursuit() == null || !Functions.GetPursuitPeds(Functions.GetActivePursuit()).Contains(driver)))
+                if (car.Exists())
                 {
                     car.Dismiss();
                 }
+            }
+        }
+    }
 
-            }
-            else
-            {
-                if (TrafficPolicerHandler.IsLSPDFRPlusRunning)
-                {
-                    API.LSPDFRPlusFunctions.AddCountToStatistic(Main.PluginName, "Traffic ambient event vehicles pulled over");
-                }
-            }
-            TrafficPolicerHandler.AmbientEventGameFibersToAbort.Add(DrivingStyleFiber);
-            TrafficPolicerHandler.AmbientEventGameFibersToAbort.Add(AmbientEventMainFiber);
-            Game.LogTrivial("Added ambient event fibers to cleanup");
+    /// <summary>
+    /// Represents a fiber used to run code concurrently with the main game thread.
+    /// </summary>
+    public class GameFiber
+    {
+        // Add members and methods as needed for the GameFiber class
+    }
+
+    /// <summary>
+    /// Represents a pedestrian (Ped) in the game.
+    /// </summary>
+    public class Ped
+    {
+        /// <summary>
+        /// Gets or sets a value indicating whether the ped is persistent.
+        /// </summary>
+        public bool IsPersistent { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the ped blocks permanent events.
+        /// </summary>
+        public bool BlockPermanentEvents { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets the current vehicle of the ped.
+        /// </summary>
+        public Vehicle CurrentVehicle { get; internal set; }
+
+        internal Blip AttachBlip()
+        {
+            throw new NotImplementedException();
         }
 
+        internal void Dismiss()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Exists()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Represents a blip (marker) attached to a Ped or Vehicle.
+        /// </summary>
+        public class Blip
+        {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public Color Color { get; internal set; }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public float Scale { get; internal set; }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
+            internal void Delete()
+            {
+                throw new NotImplementedException();
+            }
+
+            internal bool Exists()
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents a vehicle in the game.
+    /// </summary>
+    public class Vehicle
+    {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        public bool IsPersistent { get; internal set; }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
+        internal void Dismiss()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Exists()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Provides methods for displaying notifications in the game.
+    /// </summary>
+    public static class Game
+    {
+        /// <summary>
+        /// Displays a notification with the specified message.
+        /// </summary>
+        /// <param name="message">The message to display.</param>
+        public static void DisplayNotification(string message)
+        {
+            // Add logic to display notifications
+            Console.WriteLine(message);
+        }
     }
 }

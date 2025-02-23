@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Traffic_Policer</RootNamespace>
+    <!-- Add any other properties you need here -->
+  </PropertyGroup>
+
+  <!-- Define the target framework version without 'v' for comparison -->
+  <PropertyGroup>
+    <TargetFrameworkVersion>$(TargetFramework.Replace('net', ''))</TargetFrameworkVersion>
+    <_TargetFrameworkVersionWithoutV Condition="'$(TargetFrameworkVersion)' != ''">$(TargetFrameworkVersion)</_TargetFrameworkVersionWithoutV>
+  </PropertyGroup>
+
+  <!-- Avoid importing Sdk.props and Sdk.targets multiple times -->
+  <Import Project="$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.props" Condition="!Exists('$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.props.imported')" />
+  <PropertyGroup>
+    <MSBuildSDKsPath>$(MSBuildSDKsPath);$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.props.imported</MSBuildSDKsPath>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.targets" Condition="!Exists('$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.targets.imported')" />
+  <PropertyGroup>
+    <MSBuildSDKsPath>$(MSBuildSDKsPath);$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.targets.imported</MSBuildSDKsPath>
+  </PropertyGroup>
+
+  <!-- Import cross-targeting and common targets -->
+  <Import Project="$(MSBuildThisFileDirectory)..\targets\Microsoft.NET.Sdk.CrossTargeting.targets" Condition="'$(IsCrossTargetingBuild)' == 'true'" />
+ 

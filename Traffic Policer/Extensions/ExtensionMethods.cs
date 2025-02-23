@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
-using Rage.Native;
-using Traffic_Policer.Impairment_Tests;
+﻿using Traffic_Policer.Impairment_Tests;
 
 namespace Traffic_Policer.Extensions
 {

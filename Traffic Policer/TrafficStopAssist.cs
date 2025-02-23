@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
-using LSPD_First_Response.Mod.API;
 using System.Windows.Forms;
-using Rage.Native;
-using System.Drawing;
-using RAGENativeUI;
-using RAGENativeUI.Elements;
-using Albo1125.Common.CommonLibrary;
 
 namespace Traffic_Policer
 {

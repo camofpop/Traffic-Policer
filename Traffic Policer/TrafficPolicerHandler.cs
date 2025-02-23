@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
-using LSPD_First_Response.Mod.API;
 using System.Windows.Forms;
-using System.IO;
 using System.Diagnostics;
-using System.Threading;
-using System.Management;
-using System.Net;
 using System.Reflection;
-using Rage.Native;
 
 [assembly: Rage.Attributes.Plugin("Traffic Policer", Description = "INSTALL IN PLUGINS/LSPDFR. Enhances traffic policing in LSPDFR", Author = "Albo1125")]
 namespace Traffic_Policer
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class EntryPoint
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static void Main()
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             Game.DisplayNotification("You have installed Traffic Policer incorrectly and in the wrong folder: you must install it in Plugins/LSPDFR. It will then be automatically loaded when going on duty - you must NOT load it yourself via RAGEPluginHook. This is also explained in the Readme and Documentation. You will now be redirected to the installation tutorial.");
             GameFiber.Wait(5000);
